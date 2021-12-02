@@ -8,17 +8,46 @@ export class News extends Component {
           
           this.state ={ 
               articles : [],
-              loading: false
+              loading: false,
+              page:1,
+              
 
           }
       }
       async componentDidMount(){
-        let url = "https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=4fb092f186c942d7b1faf9019b0ce0a3";
+        let url = "https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=4fb092f186c942d7b1faf9019b0ce0a3&page=1&pagesize=4";
         let data = await fetch(url);
         let pareseData = await data.json();
-        console.log(pareseData);
-        this.setState({articles:pareseData.articles});
+        this.setState({articles:pareseData.articles,
+          totalResults:pareseData.totalResults});
       }
+
+     handlePrevious = async () =>{
+          console.log("Previous");
+          let url = `https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=4fb092f186c942d7b1faf9019b0ce0a3&page=${this.state.page - 1}&pagesize=4`;
+          let data = await fetch(url);
+          let pareseData = await data.json();
+          this.setState({
+            page:this.state.page - 1,
+            articles:pareseData.articles
+          });
+
+      }
+      handleNext = async  () =>{
+        console.log("next");
+        if( this.state.page + 1 > Math.ceil(this.state.totalResults/4)){
+
+        }else{
+          let url = `https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=4fb092f186c942d7b1faf9019b0ce0a3&page=${this.state.page + 1}&pagesize=4`;
+          let data = await fetch(url);
+          let pareseData = await data.json();
+          this.setState({
+            page:this.state.page + 1,
+            articles:pareseData.articles
+          })
+        }
+        
+    }
     render() {
         return (
             <div className="container my-4 ">
@@ -32,18 +61,14 @@ export class News extends Component {
                         </div>
                     })}
                     
-                
-                  
                 </div>
-                  <nav aria-label="..." className="d-flex justify-content-center">
-                    <ul className="pagination pagination-lg">
-                      <li className="page-item active" aria-current="page">
-                        <span className="page-link">1</span>
-                      </li>
-                      <li className="page-item"><a className="page-link" href="/">2</a></li>
-                      <li className="page-item"><a className="page-link" href="/">3</a></li>
-                    </ul>
-                  </nav>
+                  <div className="d-flex justify-content-between">
+                    
+                    <button type="button" disabled={this.state.page <= 1} className="btn btn-dark" onClick={this.handlePrevious} > &larr; Previous</button>
+
+                      <button type="button" className="btn btn-dark" onClick={this.handleNext} >Next &rarr; </button>
+                    
+                  </div>
                 
              </div>
         )
