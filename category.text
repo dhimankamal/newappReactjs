@@ -1,9 +1,17 @@
-<li className="nav-item"><a className="nav-link" href="/business">business</a></li>
-<li className="nav-item"><a className="nav-link" href="/entertainment">entertainment</a></li>
-<li className="nav-item"><a className="nav-link" href="/general">general</a></li>
-<li className="nav-item"><a className="nav-link" href="/health">health</a></li>
-<li className="nav-item"><a className="nav-link" href="/science">science</a></li>
-<li className="nav-item"><a className="nav-link" href="/sports">sports</a></li>
-<li className="nav-item"><a className="nav-link" href="/technology">technology</a></li>
+<Route exact path='/'> <News key='' pageSize='5' country='in' category='general' /> </Route>
+<Route exact path='/business'> <News key='' pageSize='5' country='in' category='business' /> </Route>
+<Route exact path='/entertainment'> <News key='' pageSize='5' country='in' category='entertainment' /> </Route>
+<Route exact path='/general'> <News key='' pageSize='5' country='in' category='general' /> </Route>
+<Route exact path='/health'> <News key='' pageSize='5' country='in' category='health' /> </Route>
+<Route exact path='/science'> <News key='' pageSize='5' country='in' category='science' /> </Route>
+<Route exact path='/sports'> <News key='' pageSize='5' country='in' category='sports' /> </Route>
+<Route exact path='/technology'> <News key='' pageSize='5' country='in' category='technology' /> </Route>
 
 
+business
+entertainment
+general
+health
+science
+sports
+technology
