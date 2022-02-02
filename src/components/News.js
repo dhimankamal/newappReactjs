@@ -8,9 +8,12 @@ export class News extends Component {
           country:'in',
           category:'general'
         }
+       capitalizeFirstLetter = (string) => {
+          return string.charAt(0).toUpperCase() + string.slice(1);
+        }
    
-      constructor(){
-          super();
+      constructor(props){
+          super(props);
           
           this.state ={ 
               articles : [],
@@ -18,6 +21,7 @@ export class News extends Component {
               page:1,
 
           }
+          document.title = `${this.capitalizeFirstLetter(this.props.category)} - News Agent`;
       }
       async componentDidMount(){
         let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=4fb092f186c942d7b1faf9019b0ce0a3&page=1&pagesize=${this.props.pageSize}`;
@@ -61,7 +65,7 @@ export class News extends Component {
     render() {
         return (
             <div className="container my-4 ">
-               <h2>Main News</h2>
+               <h2>Top Headlines - {this.capitalizeFirstLetter(this.props.category)} Category </h2>
                 {this.state.loading && <Spinner/>}
                <div className="row my-4">
                   {!this.state.loading && this.state.articles.map((element)=>{ 

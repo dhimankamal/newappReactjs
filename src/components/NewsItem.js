@@ -5,8 +5,8 @@ export class NewsItem extends Component {
     let { title, desp, imageUrl, newsurl, author, date,source } = this.props
     return (
       <>
-        <div className='card'>
-          <span class='position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger'>
+        <div className='card my-2'>
+          <span class='position-absolute top-0 start-50 translate-middle badge rounded-pill bg-danger'>
             {source}
             
           </span>
